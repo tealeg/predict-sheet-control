@@ -18,11 +18,11 @@ func GetPredictionData(srv *sheets.Service) ([][]interface{}, error) {
 
 	resp, err := srv.Spreadsheets.Values.Get("1gJlMak-dmc1LSbbNKlLf7jm8WHk-iXyccLV6CqGaTB8", fmt.Sprintf("A3:AJ%d", rowCount)).Do()
 	if err != nil {
-		log.Fatalf("Unable to retrieve data from sheet: %w", err)
+		return nil, fmt.Errorf("unable to retrieve data from sheet: %w", err)
 	}
 
 	if len(resp.Values) == 0 {
-		return resp.Values, fmt.Errorf("No data returned")
+		return resp.Values, fmt.Errorf("no data returned")
 	}
 	return resp.Values, nil
 }
