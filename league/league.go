@@ -22,13 +22,13 @@ var (
 		"Geoff":  6,
 		"Louise": 9,
 		"Dad":    12,
-		"Joe":    15,
+		"Jabi":   15,
 		"Steve":  18,
 		"Katy":   21,
 		"Olly":   24,
-		"Abi":    27,
-		"Will":   30,
-		"Ann":    33,
+		"Will":   27,
+		"Ann":    30,
+		"Mollie": 33,
 	}
 )
 
@@ -62,10 +62,13 @@ func NewLeague() *League {
 func NewLeagueFromData(data [][]interface{}, options ...LeagueOption) *League {
 	l := NewLeague()
 	for rowNum, row := range data {
-		if len(row) > 0 {
+		if len(row) > 4 {
 			homeTeam := row[HomeTeamCol].(string)
 			awayTeam := row[AwayTeamCol].(string)
-			if homeTeam == "" || awayTeam == "" {
+			homeTeamScore := row[HomeScoreCol].(string)
+			awayTeamScore := row[AwayScoreCol].(string)
+
+			if homeTeam == "" || awayTeam == "" || homeTeamScore == "" || awayTeamScore == "" {
 				// Skip empty rows
 				continue
 			}
